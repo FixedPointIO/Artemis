@@ -9,7 +9,7 @@ Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 - **Chapman-Richards Growth Function**: Estimate tree and forest growth variables with high precision.
 - **Data Cleaning**: Specialized scripts to process and clean forestry data.
 - **Derivative Calculations**: Compute Absolute Growth Rate (AGR), Relative Growth Rate (RGR), and more.
-- **Visualization Tools**: [If there are any visualization tools, mention them here.]
+- **Visualization Tools**: TBC
 
 ## Installation
 
