@@ -1,4 +1,6 @@
 library(nortest)
+library(ggplot2)
+library(gridExtra)
 
 summarize_data <- function(data_frame) {
   summary_list <- list()
@@ -40,12 +42,19 @@ summarize_data <- function(data_frame) {
   missing_data <- sapply(data_frame, function(col) sum(is.na(col)))
   summary_list$Missing_Data <- missing_data
   
-  # QQ Plots for Numeric Data
+  # Combined QQ Plots and Histograms for Numeric Data (excluding age)
   if (any(numeric_cols)) {
-    par(mfrow = c(2, ceiling(sum(numeric_cols) / 2))) # Arrange plots in a grid
-    lapply(names(data_frame[numeric_cols]), function(colname) {
+    cols_to_plot <- setdiff(names(data_frame[numeric_cols]), "age")
+    par(mfrow = c(2, length(cols_to_plot))) # Arrange plots in a grid
+    
+    lapply(cols_to_plot, function(colname) {
+      # QQ Plot
       qqnorm(data_frame[[colname]], main = paste("QQ Plot for", colname))
       qqline(data_frame[[colname]])
+      
+      # Histogram
+      hist(data_frame[[colname]], main = paste("Histogram for", colname), xlab = colname, freq = FALSE)
+      lines(density(data_frame[[colname]], na.rm = TRUE), col = "blue")
     })
   }
   
