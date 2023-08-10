@@ -3,7 +3,7 @@ library(robustbase)
 library(openxlsx)
 library(ggplot2)
 
-estimate_chapman_richards <- function(data, species_col = 'botanical_names', age_col = 'age', height_col = 'height', output_dir = getwd()) {
+estimate_chapman_richards <- function(data, species_col = 'botanical_names', output_dir = getwd()) {
   
   # Create output directories
   current_datetime <- format(Sys.time(), '%Y%m%d_%H%M%S')
@@ -26,14 +26,14 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
     
     # Attempt to fit model, with a starting value for p of 3 and then 4
     tryCatch({
-      model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
+      model <- nlrob(height ~ A * (1 - exp(-k * age))^p, 
                     data = species_data, 
-                    start = list(A = max(species_data[[height_col]]), k = 0.03, p = 3), 
+                    start = list(A = max(species_data$height), k = 0.03, p = 3), 
                     trace = FALSE)
     }, error = function(e) {
-      model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
+      model <- nlrob(height ~ A * (1 - exp(-k * age))^p, 
                     data = species_data, 
-                    start = list(A = max(species_data[[height_col]]), k = 0.03, p = 4), 
+                    start = list(A = max(species_data$height), k = 0.03, p = 4), 
                     trace = FALSE)
     })
     
@@ -57,4 +57,3 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
   
   return(list(parameters = param_results, fitted_values = fitted_values))
 }
-
