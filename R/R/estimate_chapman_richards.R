@@ -3,7 +3,7 @@ library(robustbase)
 library(openxlsx)
 library(ggplot2)
 
-estimate_chapman_richards <- function(data, species_col = 'botanical_names', output_dir = getwd()) {
+estimate_chapman_richards <- function(data, species_col = 'botanical_names', age_col = 'age', height_col = 'height', output_dir = getwd()) {
   
   # Create output directories
   current_datetime <- format(Sys.time(), '%Y%m%d_%H%M%S')
@@ -24,17 +24,20 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', out
   for (species in unique(data[[species_col]])) {
     species_data <- subset(data, data[[species_col]] == species)
     
-    # Attempt to fit model, with a starting value for p of 3 and then 4
+    # Calculate initial guesses
+    A_guess <- median(species_data[[height_col]], na.rm = TRUE)
+    k_guess <- 1 / median(species_data[[age_col]], na.rm = TRUE)
+    p_guess <- 3
+    
+    # Attempt to fit model using the initial guesses
     tryCatch({
-      model <- nlrob(height ~ A * (1 - exp(-k * age))^p, 
+      model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
                     data = species_data, 
-                    start = list(A = max(species_data$height), k = 0.03, p = 3), 
+                    start = list(A = A_guess, k = k_guess, p = p_guess), 
                     trace = FALSE)
     }, error = function(e) {
-      model <- nlrob(height ~ A * (1 - exp(-k * age))^p, 
-                    data = species_data, 
-                    start = list(A = max(species_data$height), k = 0.03, p = 4), 
-                    trace = FALSE)
+      cat("Error with species:", species, "\n")
+      next # Skip to the next iteration if there's an error
     })
     
     # Save parameters
