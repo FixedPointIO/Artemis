@@ -3,6 +3,7 @@ library(ggplot2)
 library(gridExtra)
 
 summarize_data <- function(data_frame) {
+  
   summary_list <- list()
   
   # Numeric Summary
@@ -45,17 +46,37 @@ summarize_data <- function(data_frame) {
   # Combined QQ Plots and Histograms for Numeric Data (excluding age)
   if (any(numeric_cols)) {
     cols_to_plot <- setdiff(names(data_frame[numeric_cols]), "age")
-    par(mfrow = c(2, length(cols_to_plot))) # Arrange plots in a grid
     
-    lapply(cols_to_plot, function(colname) {
-      # QQ Plot
-      qqnorm(data_frame[[colname]], main = paste("QQ Plot for", colname))
-      qqline(data_frame[[colname]])
+    plot_list <- list() # To store plots
+    
+    for (colname in cols_to_plot) {
+      # QQ Plot using ggplot2
+      sample_values <- data_frame[[colname]]
+      theoretical_quantiles <- qnorm((rank(sample_values, na.last = "keep") - 0.5) / length(sample_values))
+      qq_data <- data.frame(sample = sample_values, theoretical = theoretical_quantiles)
+      qq_plot <- ggplot(qq_data, aes(x = theoretical, y = sample)) +
+        geom_point() +
+        geom_smooth(method = "lm", color = "red") +
+        ggtitle(paste("QQ Plot for", colname)) +
+        theme_minimal()
       
-      # Histogram
-      hist(data_frame[[colname]], main = paste("Histogram for", colname), xlab = colname, freq = FALSE)
-      lines(density(data_frame[[colname]], na.rm = TRUE), col = "blue")
-    })
+      # Histogram using ggplot2
+      hist_plot <- ggplot(data_frame, aes_string(colname)) +
+        geom_histogram(aes(y = ..density..), bins = 30) +
+        geom_density(color = "blue") +
+        ggtitle(paste("Histogram for", colname)) +
+        theme_minimal()
+      
+      plot_list[[paste0(colname, "_qq")]] <- qq_plot
+      plot_list[[paste0(colname, "_hist")]] <- hist_plot
+    }
+    
+    # Combine plots using gridExtra
+    combined_plot <- grid.arrange(
+      plot_listheightqq,plotlistheight_qq, plot_listheight_hist,
+      plot_listdbhqq,plotlistdbh_qq, plot_listdbh_hist,
+      nrow = 2
+    )
   }
   
   return(summary_list)
