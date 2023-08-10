@@ -29,16 +29,19 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
     k_guess <- 1 / median(species_data[[age_col]], na.rm = TRUE)
     p_guess <- 3
     
+    model <- NULL
     # Attempt to fit model using the initial guesses
-    tryCatch({
+    try({
       model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
                     data = species_data, 
                     start = list(A = A_guess, k = k_guess, p = p_guess), 
                     trace = FALSE)
-    }, error = function(e) {
+    }, silent = TRUE)
+    
+    if (is.null(model)) {
       cat("Error with species:", species, "\n")
-      next # Skip to the next iteration if there's an error
-    })
+      next
+    }
     
     # Save parameters
     param_results <- rbind(param_results, c(species, coef(model)))
