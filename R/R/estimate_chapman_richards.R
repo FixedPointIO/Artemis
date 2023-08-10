@@ -49,7 +49,7 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
       }, error = function(e) {
         cat(paste("Error with species:", species, ". Error message:", e$message, "\n"))
       })
-    })
+    }) 
     
     if (success) {
       # Save parameters
