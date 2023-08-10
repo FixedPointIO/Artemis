@@ -24,37 +24,43 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
   for (species in unique(data[[species_col]])) {
     species_data <- subset(data, data[[species_col]] == species)
     
-    # Calculate initial guesses
-    A_guess <- median(species_data[[height_col]], na.rm = TRUE)
-    k_guess <- 1 / median(species_data[[age_col]], na.rm = TRUE)
-    p_guess <- 3
-    
-    model <- NULL
-    # Attempt to fit model using the initial guesses
-    try({
+    success <- FALSE # Flag to track if the model fit was successful for the species
+    tryCatch({
       model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
                     data = species_data, 
-                    start = list(A = A_guess, k = k_guess, p = p_guess), 
+                    start = list(A = max(species_data[[height_col]]), 
+                                 k = 1/max(species_data[[age_col]]), 
+                                 p = 3), 
                     trace = FALSE)
-    }, silent = TRUE)
+      success <- TRUE
+    }, error = function(e) {
+      tryCatch({
+        model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
+                      data = species_data, 
+                      start = list(A = max(species_data[[height_col]]), 
+                                   k = 1/max(species_data[[age_col]]), 
+                                   p = 4), 
+                      trace = FALSE)
+        success <- TRUE
+      }, error = function(e) {
+        cat(paste("Error with species:", species, "\n"))
+      })
+    })
     
-    if (is.null(model)) {
-      cat("Error with species:", species, "\n")
-      next
+    if (success) {
+      # Save parameters
+      param_results <- rbind(param_results, c(species, coef(model)))
+    
+      # Generate fitted values
+      fitted_height <- coef(model)['A'] * (1 - exp(-coef(model)['k'] * age_range))^coef(model)['p']
+      fitted_values[species] <- fitted_height
+    
+      # QQ plot for species
+      png(filename = file.path(image_folder_path, paste0(species, "_qq_plot.png")))
+      qqnorm(residuals(model))
+      qqline(residuals(model))
+      dev.off()
     }
-    
-    # Save parameters
-    param_results <- rbind(param_results, c(species, coef(model)))
-    
-    # Generate fitted values
-    fitted_height <- coef(model)['A'] * (1 - exp(-coef(model)['k'] * age_range))^coef(model)['p']
-    fitted_values[species] <- fitted_height
-    
-    # QQ plot for species
-    png(filename = file.path(image_folder_path, paste0(species, "_qq_plot.png")))
-    qqnorm(residuals(model))
-    qqline(residuals(model))
-    dev.off()
   }
   
   # Save results to Excel
