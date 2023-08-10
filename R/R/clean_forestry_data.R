@@ -29,7 +29,10 @@ clean_forestry_data <- function(data_frame) {
   data_frame[char_cols] <- lapply(data_frame[char_cols], function(col) {
     gsub('"', "'", col)
   })
-  
+
+  # 6. Remove observations where age is less than 1
+  data_frame <- data_frame[data_frame$age >= 1, ]
+
   # Additional cleaning tasks can be added here as needed
   
   return(data_frame)
