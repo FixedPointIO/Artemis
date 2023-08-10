@@ -3,7 +3,6 @@ library(ggplot2)
 library(gridExtra)
 
 summarize_data <- function(data_frame) {
-  
   summary_list <- list()
   
   # Numeric Summary
@@ -46,37 +45,25 @@ summarize_data <- function(data_frame) {
   # Combined QQ Plots and Histograms for Numeric Data (excluding age)
   if (any(numeric_cols)) {
     cols_to_plot <- setdiff(names(data_frame[numeric_cols]), "age")
-    
-    plot_list <- list() # To store plots
+    plot_list <- list()
     
     for (colname in cols_to_plot) {
-      # QQ Plot using ggplot2
-      sample_values <- data_frame[[colname]]
-      theoretical_quantiles <- qnorm((rank(sample_values, na.last = "keep") - 0.5) / length(sample_values))
-      qq_data <- data.frame(sample = sample_values, theoretical = theoretical_quantiles)
-      qq_plot <- ggplot(qq_data, aes(x = theoretical, y = sample)) +
-        geom_point() +
-        geom_smooth(method = "lm", color = "red") +
-        ggtitle(paste("QQ Plot for", colname)) +
-        theme_minimal()
+      # QQ Plot
+      plot_qq <- ggplot(data_frame, aes(sample = data_frame[[colname]])) + 
+        geom_qq() + 
+        geom_qq_line() + 
+        ggtitle(paste("QQ Plot for", colname))
       
-      # Histogram using ggplot2
-      hist_plot <- ggplot(data_frame, aes_string(colname)) +
-        geom_histogram(aes(y = ..density..), bins = 30) +
-        geom_density(color = "blue") +
-        ggtitle(paste("Histogram for", colname)) +
-        theme_minimal()
+      # Histogram
+      plot_hist <- ggplot(data_frame, aes(data_frame[[colname]])) + 
+        geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.7) + 
+        geom_density(col = "red") + 
+        ggtitle(paste("Histogram for", colname))
       
-      plot_list[[paste0(colname, "_qq")]] <- qq_plot
-      plot_list[[paste0(colname, "_hist")]] <- hist_plot
+      plot_list[[colname]] <- list(plot_qq, plot_hist)
     }
     
-    # Combine plots using gridExtra
-    combined_plot <- grid.arrange(
-      plot_listheightqq,plotlistheight_qq, plot_listheight_hist,
-      plot_listdbhqq,plotlistdbh_qq, plot_listdbh_hist,
-      nrow = 2
-    )
+    grid.arrange(grobs = unlist(plot_list, recursive = FALSE))
   }
   
   return(summary_list)
