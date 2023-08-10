@@ -24,6 +24,11 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
   for (species in unique(data[[species_col]])) {
     species_data <- subset(data, data[[species_col]] == species)
     
+    if (nrow(species_data) < 3) { # minimum number of points to fit the model
+      cat(paste("Not enough data for species:", species, "\n"))
+      next
+    }
+    
     success <- FALSE # Flag to track if the model fit was successful for the species
     tryCatch({
       model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
@@ -53,7 +58,8 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
     
       # Generate fitted values
       fitted_height <- coef(model)['A'] * (1 - exp(-coef(model)['k'] * age_range))^coef(model)['p']
-      fitted_values[species] <- fitted_height
+      fitted_values <- cbind(fitted_values, fitted_height)
+      colnames(fitted_values)[ncol(fitted_values)] <- species
     
       # QQ plot for species
       png(filename = file.path(image_folder_path, paste0(species, "_qq_plot.png")))
@@ -64,8 +70,17 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
   }
   
   # Save results to Excel
-  write.xlsx(param_results, file.path(numerical_folder_path, "parameters.xlsx"), row.names = FALSE)
-  write.xlsx(fitted_values, file.path(numerical_folder_path, "output_file.xlsx"), row.names = FALSE)
+  if (nrow(param_results) > 0) {
+    write.xlsx(param_results, file.path(numerical_folder_path, "parameters.xlsx"), row.names = FALSE)
+  } else {
+    cat("No parameter results to save to Excel.\n")
+  }
+  
+  if (ncol(fitted_values) > 1) { # More than just the age column
+    write.xlsx(fitted_values, file.path(numerical_folder_path, "output_file.xlsx"), row.names = FALSE)
+  } else {
+    cat("No fitted values to save to Excel.\n")
+  }
   
   return(list(parameters = param_results, fitted_values = fitted_values))
 }
