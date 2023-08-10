@@ -1,7 +1,6 @@
 library(nortest)
 library(robustbase)
 library(openxlsx)
-library(ggplot2)
 
 estimate_chapman_richards <- function(data, species_col = 'botanical_names', age_col = 'age', height_col = 'height', output_dir = getwd()) {
   
@@ -48,19 +47,18 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
                       trace = FALSE)
         success <- TRUE
       }, error = function(e) {
-        cat(paste("Error with species:", species, "\n"))
+        cat(paste("Error with species:", species, ". Error message:", e$message, "\n"))
       })
     })
     
     if (success) {
       # Save parameters
       param_results <- rbind(param_results, c(species, coef(model)))
-    
+
       # Generate fitted values
       fitted_height <- coef(model)['A'] * (1 - exp(-coef(model)['k'] * age_range))^coef(model)['p']
-      fitted_values <- cbind(fitted_values, fitted_height)
-      colnames(fitted_values)[ncol(fitted_values)] <- species
-    
+      fitted_values[species] <- fitted_height
+
       # QQ plot for species
       png(filename = file.path(image_folder_path, paste0(species, "_qq_plot.png")))
       qqnorm(residuals(model))
@@ -69,14 +67,14 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
     }
   }
   
-  # Save results to Excel
+  # Save results to Excel, if there are any
   if (nrow(param_results) > 0) {
     write.xlsx(param_results, file.path(numerical_folder_path, "parameters.xlsx"), row.names = FALSE)
   } else {
     cat("No parameter results to save to Excel.\n")
   }
-  
-  if (ncol(fitted_values) > 1) { # More than just the age column
+
+  if (ncol(fitted_values) > 1) { # check if there are any columns besides 'age'
     write.xlsx(fitted_values, file.path(numerical_folder_path, "output_file.xlsx"), row.names = FALSE)
   } else {
     cat("No fitted values to save to Excel.\n")
