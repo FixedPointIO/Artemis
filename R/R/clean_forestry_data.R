@@ -3,15 +3,15 @@ clean_forestry_data <- function(data_frame) {
   data_frame <- data.frame(lapply(data_frame, trimws), stringsAsFactors = FALSE)
   colnames(data_frame) <- trimws(colnames(data_frame))
 
-  # Check for non-numeric conversion errors and handle them if needed
-  if (any(is.na(data_frameheight))|any(is.na(dataframeheight)) | any(is.na(data_frameage)) | any(is.na(data_frame$dbh))) {
-    cat("Warning: NA values introduced when converting to numeric. Check original data for non-numeric characters.\n")
-  }
-
   # Convert height, age, and dbh to numeric
   data_frame$height  <-  as.numeric(data_frame$height)
   data_frame$age  <-  as.numeric(data_frame$age)
   data_frame$dbh  <-  as.numeric(data_frame$dbh)
+  
+  # Check for non-numeric conversion errors and handle them if needed
+  if (any(is.na(data_frameheight))|any(is.na(dataframeheight)) | any(is.na(data_frameage)) | any(is.na(data_frame$dbh))) {
+    cat("Warning: NA values introduced when converting to numeric. Check original data for non-numeric characters.\n")
+  }
   
   # 1. Check for duplicate IDs
   if (anyDuplicated(data_frame$commontreeid) > 0) {
