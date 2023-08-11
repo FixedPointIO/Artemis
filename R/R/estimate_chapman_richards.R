@@ -1,85 +1,39 @@
-library(nortest)
-library(robustbase)
-library(openxlsx)
-
-estimate_chapman_richards <- function(data, species_col = 'botanical_names', age_col = 'age', height_col = 'height', output_dir = getwd()) {
+clean_forestry_data <- function(data_frame) {
+  # 0. Remove leading and trailing spaces from all observations and headers
+  data_frame <- data.frame(lapply(data_frame, trimws), stringsAsFactors = FALSE)
+  colnames(data_frame) <- trimws(colnames(data_frame))
   
-  # Create output directories
-  current_datetime <- format(Sys.time(), '%Y%m%d_%H%M%S')
-  output_folder_name <- paste0("artemis_", current_datetime)
-  image_folder_path <- file.path(output_dir, output_folder_name, 'images')
-  numerical_folder_path <- file.path(output_dir, output_folder_name, 'numerical')
-  dir.create(image_folder_path, recursive = TRUE)
-  dir.create(numerical_folder_path, recursive = TRUE)
+  # 1. Check for duplicate IDs
+  if (anyDuplicated(data_frame$commontreeid) > 0) {
+    cat("Warning: There are duplicate commontreeid entries.\n")
+  }
   
-  # Placeholder for results
-  param_results <- data.frame(species = character(), A = numeric(), k = numeric(), p = numeric(), stringsAsFactors = FALSE)
+  # 2. Convert all strings to lowercase for consistency
+  char_cols <- sapply(data_frame, is.character)
+  data_frame[char_cols] <- lapply(data_frame[char_cols], tolower)
   
-  # For fitted values
-  age_range <- 1:30
-  fitted_values <- data.frame(age = age_range)
+  # 3. Check for missing observations
+  missing_data <- sapply(data_frame, function(col) sum(is.na(col)))
+  cat("Number of missing observations per column:\n")
+  print(missing_data)
   
-  # For each species, estimate parameters
-  for (species in unique(data[[species_col]])) {
-    species_data <- subset(data, data[[species_col]] == species)
-    
-    # Skip species with less than 30 observations
-    if (nrow(species_data) < 30) {
-      cat(paste("Skipping species due to insufficient data:", species, "\n"))
-      next
-    }
-    
-    success <- FALSE # Flag to track if the model fit was successful for the species
-    tryCatch({
-      model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
-                    data = species_data, 
-                    start = list(A = max(species_data[[height_col]]), 
-                                 k = 1/max(species_data[[age_col]]), 
-                                 p = 3), 
-                    trace = FALSE)
-      success <- TRUE
-    }, error = function(e) {
-      tryCatch({
-        model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
-                      data = species_data, 
-                      start = list(A = max(species_data[[height_col]]), 
-                                   k = 1/max(species_data[[age_col]]), 
-                                   p = 4), 
-                      trace = FALSE)
-        success <- TRUE
-      }, error = function(e) {
-        cat(paste("Error with species:", species, ". Error message:", e$message, "\n"))
-      })
-    })
-    
-    if (success) {
-      # Save parameters
-      param_results <- rbind(param_results, c(species, coef(model)))
-
-      # Generate fitted values
-      fitted_height <- coef(model)['A'] * (1 - exp(-coef(model)['k'] * age_range))^coef(model)['p']
-      fitted_values[species] <- fitted_height
-
-      # QQ plot for species
-      png(filename = file.path(image_folder_path, paste0(species, "_qq_plot.png")))
-      qqnorm(residuals(model))
-      qqline(residuals(model))
-      dev.off()
+  # 4. Validate Numeric Fields
+  numeric_cols <- c("height", "age", "dbh")
+  for (col in numeric_cols) {
+    if (any(!is.na(as.numeric(data_frame[[col]])) & !is.finite(as.numeric(data_frame[[col]])))) {
+      cat(paste("Warning: Non-numeric data found in column", col, "\n"))
     }
   }
   
-  # Save results to Excel, if there are any
-  if (nrow(param_results) > 0) {
-    write.xlsx(param_results, file.path(numerical_folder_path, "parameters.xlsx"), row.names = FALSE)
-  } else {
-    cat("No parameter results to save to Excel.\n")
-  }
+  # 5. Ensure consistent quote marks
+  data_frame[char_cols] <- lapply(data_frame[char_cols], function(col) {
+    gsub('"', "'", col)
+  })
 
-  if (ncol(fitted_values) > 1) { # check if there are any columns besides 'age'
-    write.xlsx(fitted_values, file.path(numerical_folder_path, "output_file.xlsx"), row.names = FALSE)
-  } else {
-    cat("No fitted values to save to Excel.\n")
-  }
+  # 6. Remove observations where age is less than 1
+  data_frame <- data_frame[data_frame$age >= 1, ]
+
+  # Additional cleaning tasks can be added here as needed
   
-  return(list(parameters = param_results, fitted_values = fitted_values))
+  return(data_frame)
 }
