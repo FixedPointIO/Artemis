@@ -1,6 +1,7 @@
 library(nortest)
 library(ggplot2)
 library(gridExtra)
+library(openxlsx)
 
 summarize_data <- function(data_frame) {
   summary_list <- list()
@@ -42,29 +43,32 @@ summarize_data <- function(data_frame) {
   missing_data <- sapply(data_frame, function(col) sum(is.na(col)))
   summary_list$Missing_Data <- missing_data
   
-  # Combined QQ Plots and Histograms for Numeric Data (excluding age)
-  if (any(numeric_cols)) {
-    cols_to_plot <- setdiff(names(data_frame[numeric_cols]), "age")
-    plot_list <- list()
+  # Save the data_summary to Excel
+  write.xlsx(summary_list, "data_summary.xlsx")
+  
+  # Combined QQ Plots and Histograms for Numeric Data (age, height, and dbh)
+  cols_to_plot <- c("age", "height", "dbh")
+  plot_list <- list()
+  
+  for (colname in cols_to_plot) {
+    # QQ Plot
+    plot_qq <- ggplot(data_frame, aes(sample = data_frame[[colname]])) + 
+      geom_qq() + 
+      geom_qq_line() + 
+      ggtitle(paste("QQ Plot for", colname))
     
-    for (colname in cols_to_plot) {
-      # QQ Plot
-      plot_qq <- ggplot(data_frame, aes(sample = data_frame[[colname]])) + 
-        geom_qq() + 
-        geom_qq_line() + 
-        ggtitle(paste("QQ Plot for", colname))
-      
-      # Histogram
-      plot_hist <- ggplot(data_frame, aes(data_frame[[colname]])) + 
-        geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.7) + 
-        geom_density(col = "red") + 
-        ggtitle(paste("Histogram for", colname))
-      
-      plot_list[[colname]] <- list(plot_qq, plot_hist)
-    }
+    # Histogram
+    plot_hist <- ggplot(data_frame, aes(data_frame[[colname]])) + 
+      geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.7) + 
+      geom_density(col = "red") + 
+      ggtitle(paste("Histogram for", colname))
     
-    grid.arrange(grobs = unlist(plot_list, recursive = FALSE))
+    plot_list[[paste0(colname, "_qq")]] <- plot_qq
+    plot_list[[paste0(colname, "_hist")]] <- plot_hist
   }
+  
+  # Display the plots
+  grid.arrange(grobs = unlist(plot_list, recursive = FALSE), ncol = 2)
   
   return(summary_list)
 }
