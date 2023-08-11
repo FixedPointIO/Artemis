@@ -9,9 +9,9 @@ clean_forestry_data <- function(data_frame) {
   }
 
   # Convert height, age, and dbh to numeric
-  data_frameheight<−as.numeric(dataframeheight  <-  as.numeric(data_frameheight)
-  data_frameage<−as.numeric(dataframeage  <-  as.numeric(data_frameage)
-  data_framedbh<−as.numeric(dataframedbh  <-  as.numeric(data_framedbh)
+  data_frame$height  <-  as.numeric(data_frame$height)
+  data_frame$age  <-  as.numeric(data_frame$age)
+  data_frame$dbh  <-  as.numeric(data_frame$dbh)
   
   # 1. Check for duplicate IDs
   if (anyDuplicated(data_frame$commontreeid) > 0) {
