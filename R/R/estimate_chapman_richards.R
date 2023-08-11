@@ -30,7 +30,7 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
     
     success <- FALSE # Flag to track if the model fit was successful for the species
     tryCatch({
-      model <- nlrob(species_data[[height_col]] ~ A * (1 - exp(-k * species_data[[age_col]]))^p, 
+      model <- nlrob(as.formula(paste(height_col, "~ A * (1 - exp(-k *", age_col, "))^p")), 
                     data = species_data, 
                     start = list(A = max(species_data[[height_col]]), 
                                  k = 1/max(species_data[[age_col]]), 
@@ -39,7 +39,7 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
       success <- TRUE
     }, error = function(e) {
       tryCatch({
-        model <- nlrob(species_data[[height_col]] ~ A * (1 - exp(-k * species_data[[age_col]]))^p, 
+        model <- nlrob(as.formula(paste(height_col, "~ A * (1 - exp(-k *", age_col, "))^p")), 
                       data = species_data, 
                       start = list(A = max(species_data[[height_col]]), 
                                    k = 1/max(species_data[[age_col]]), 
