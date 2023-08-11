@@ -7,5 +7,5 @@ Author: FixedPoint IO Ltd
 Maintainer: Charles <charles@fixedpoint.io>
 Description: Artemis is a specialized R package for forestry statistics. It is built upon the Chapman-Richards growth function and provides tools for estimating tree and forest growth variables. The package also includes data cleaning scripts tailored for forestry data. 
 License: Proprietary
-Depends: R (>= 4.0.0), robustbase, openxlsx, nortest, ggplot2, readxl, gridExtra
+Depends: R (>= 4.0.0), remotes, robustbase, openxlsx, nortest, ggplot2, readxl, gridExtra
 Copyright: This code was created by FixedPoint IO Ltd and is property of Climate Impact Partners. Refer to the license agreement for usage restrictions.
