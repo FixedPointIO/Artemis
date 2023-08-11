@@ -23,14 +23,15 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
   for (species in unique(data[[species_col]])) {
     species_data <- subset(data, data[[species_col]] == species)
     
-    if (nrow(species_data) < 3) { # minimum number of points to fit the model
-      cat(paste("Not enough data for species:", species, "\n"))
+    # Skip species with less than 30 observations
+    if (nrow(species_data) < 30) {
+      cat(paste("Skipping species due to insufficient data:", species, "\n"))
       next
     }
     
     success <- FALSE # Flag to track if the model fit was successful for the species
     tryCatch({
-      model <- nlrob(as.formula(paste(height_col, "~ A * (1 - exp(-k *", age_col, "))^p")), 
+      model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
                     data = species_data, 
                     start = list(A = max(species_data[[height_col]]), 
                                  k = 1/max(species_data[[age_col]]), 
@@ -39,7 +40,7 @@ estimate_chapman_richards <- function(data, species_col = 'botanical_names', age
       success <- TRUE
     }, error = function(e) {
       tryCatch({
-        model <- nlrob(as.formula(paste(height_col, "~ A * (1 - exp(-k *", age_col, "))^p")), 
+        model <- nlrob(eval(parse(text=height_col)) ~ A * (1 - exp(-k * eval(parse(text=age_col))))^p, 
                       data = species_data, 
                       start = list(A = max(species_data[[height_col]]), 
                                    k = 1/max(species_data[[age_col]]), 
