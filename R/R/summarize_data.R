@@ -66,8 +66,9 @@ summarize_data <- function(data_frame) {
     plot_list <- append(plot_list, list(plot_qq, plot_hist))
   }
   
-  # Display the plots
-  grid.arrange(grobs = plot_list, ncol = 2)
+  # Combine the plots and save it
+  combined_plot <- arrangeGrob(grobs = plot_list, ncol = 2)
+  ggsave("combined_plots.png", combined_plot, width = 10, height = 10)
   
   return(summary_list)
 }
