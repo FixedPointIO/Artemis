@@ -63,12 +63,11 @@ summarize_data <- function(data_frame) {
       geom_density(col = "red") + 
       ggtitle(paste("Histogram for", colname))
     
-    plot_list[[paste0(colname, "_qq")]] <- plot_qq
-    plot_list[[paste0(colname, "_hist")]] <- plot_hist
+    plot_list <- append(plot_list, list(plot_qq, plot_hist))
   }
   
   # Display the plots
-  grid.arrange(grobs = unlist(plot_list, recursive = FALSE), ncol = 2)
+  grid.arrange(grobs = plot_list, ncol = 2)
   
   return(summary_list)
 }
