@@ -10,7 +10,7 @@ Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 - **Data Cleaning**: Specialized scripts to process and clean forestry data.
 - **Innovative Optimization**: Utilizes Nevergrad, a cutting-edge optimization library, to robustly fit growth model parameters to noisy forestry data.
 
-![alt text](https://github.com/fixedpointexperimental/Artemis/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png?raw=true)
 
 ## Incorporating Priors for Parameter Ranges
 ARTEMIS offers a unique and powerful feature that allows users to incorporate prior information, or "priors," into the optimization process for parameter ranges. Priors are particularly useful when there is strong academic evidence or ground truth about certain parameter values, allowing you to guide the optimization process toward values that align with existing knowledge. This feature is especially valuable in forestry statistics, where noisy and spurious outlier-prone data is common.
