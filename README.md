@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="./somelink">
+  <a href="https://github.com/fixedpointexperimental/Artemis">
     <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/logo.png" alt="Artemis" width="150" height="150">
   </a>
 </p>
@@ -17,7 +17,7 @@ Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 - **Innovative Optimization**: Utilizes Nevergrad, a cutting-edge optimization library, to robustly fit growth model parameters to noisy forestry data.
 
 <p align="center">
-  <a href="./somelink">
+  <a href="(https://github.com/fixedpointexperimental/Artemis)">
     <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png" alt="Artemis" width="350" height="350">
   </a>
 </p>
