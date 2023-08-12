@@ -13,7 +13,7 @@ Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 ## Incorporating Priors for Parameter Ranges
 ARTEMIS offers a unique and powerful feature that allows users to incorporate prior information, or "priors," into the optimization process for parameter ranges. Priors are particularly useful when there is strong academic evidence or ground truth about certain parameter values, allowing you to guide the optimization process toward values that align with existing knowledge. This feature is especially valuable in forestry statistics, where noisy and spurious outlier-prone data is common.
 
-To use priors with ARTEMIS, you can specify the desired ranges for each parameter along with your prior knowledge range. The optimization process will then be influenced by these priors, helping you obtain more meaningful and accurate parameter estimates. Priors can be applied to parameters such as tree growth rates (A), decay constants (k), and shape parameters (p), enabling you to harness both domain expertise and statistical optimization for enhanced results.
+To use priors with ARTEMIS, you can specify the desired ranges for each parameter along with your prior knowledge range. The optimization process will then be influenced by these priors, helping you obtain more meaningful and accurate parameter estimates. Priors can be applied to parameters such as tree growth rates (A), decay constants (k), and shape parameters (p), enabling you to harness both domain expertise and statistical optimization for robust results.
 
 ## Installation
 
