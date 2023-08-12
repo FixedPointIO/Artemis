@@ -8,12 +8,9 @@
 
 ARTEMIS (Advanced Regression and Tree Estimation Model for Integrated Silviology) is an advanced Python package designed for forestry statistics, bringing innovation to the field through the incorporation of the Chapman-Richards growth function and state-of-the-art optimization techniques. ARTEMIS offers a suite of tools for estimating tree and forest growth variables, and it particularly excels in handling forestry data characterized by noise and spurious outliers.
 
-
-
 Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 
 ## Features
-
 
 - **Chapman-Richards Growth Function**: Estimate tree and forest growth variables with high precision.
 - **Data Cleaning**: Specialized scripts to process and clean forestry data.
@@ -26,6 +23,7 @@ Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 </p>
 
 ## Incorporating Priors for Parameter Ranges
+
 ARTEMIS offers a unique and powerful feature that allows users to incorporate prior information, or "priors," into the optimization process for parameter ranges. Priors are particularly useful when there is strong academic evidence or ground truth about certain parameter values, allowing you to guide the optimization process toward values that align with existing knowledge. This feature is especially valuable in forestry statistics, where noisy and spurious outlier-prone data is common.
 
 To use priors with ARTEMIS, you can specify the desired ranges for each parameter along with your prior knowledge range. The optimization process will then be influenced by these priors, helping you obtain more meaningful and accurate parameter estimates. Priors can be applied to parameters such as tree growth rates (A), decay constants (k), and shape parameters (p), enabling you to harness both domain expertise and statistical optimization for robust results.
