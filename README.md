@@ -45,7 +45,7 @@ Among these, \textbf{NGOpt} stands out as a paragon of hand-crafted excellence. 
 
 The evolution of NGOpt involved iterative enhancements. Over time, certain rules were refined, and specific optimizers were replaced to enhance performance. This rigorous and iterative process birthed a sophisticated algorithm selection wizard. The resultant NGOpt not only embodies the complexity of its design process but also showcases superior performance. When pitted against renowned standalone optimizers across various benchmark suites, NGOpt consistently emerges as a top performer.
 
-For ARTEMIS, the integration of NGOpt means access to a tool that is not just versatile but also empirically validated. By leveraging NGOpt's capabilities, ARTEMIS ensures that its optimization processes are always aligned with the best available strategies, guaranteeing optimal outcomes across diverse forestry challenges.
+For ARTEMIS, the integration of NGOpt means access to a tool that is not just versatile but also empirically validated. By leveraging NGOpt's capabilities, ARTEMIS ensures that its optimization processes are always aligned with the best available strategies, guaranteeing optimal outcomes across diverse forestry challenges. 
 
 
 
