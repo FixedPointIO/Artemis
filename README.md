@@ -1,6 +1,6 @@
 # ARTEMIS
 
-![alt text](https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png?raw=true =250x250)
+![test image size](/images/logo.png){:height="50%" width="50%"}
 ___
 ARTEMIS (Advanced Regression and Tree Estimation Model for Integrated Silviology) is an advanced Python package designed for forestry statistics, bringing innovation to the field through the incorporation of the Chapman-Richards growth function and state-of-the-art optimization techniques. ARTEMIS offers a suite of tools for estimating tree and forest growth variables, and it particularly excels in handling forestry data characterized by noise and spurious outliers. 
 
