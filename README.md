@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/fixedpointexperimental/Artemis">
-    <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/logo.png" alt="Artemis" width="150" height="150">
+    <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/artemis.jpg" alt="Artemis" width="150" height="150">
   </a>
 </p>
 
