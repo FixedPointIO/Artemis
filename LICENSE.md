@@ -1,32 +1,38 @@
-Artemis Forestry Statistics Software License Agreement
+# ARTEMIS Software License Agreement
 
-COPYRIGHT NOTICE:
+**THIS SOFTWARE LICENSE AGREEMENT** ("Agreement") is entered into between **FixedPoint IO Ltd**, a company registered in England with company number 13288661 and its registered office address at 20-22 Wenlock Road, London, England, N1 7GU ("Licensor") and **Climate Impact Partners** ("Licensee").
 
-This code was created by FixedPoint IO Ltd and is the property of Climate Impact Partners.
-It is being distributed on an "as is" basis.
-Use of this code, or any part thereof, is contingent upon leaving this copyright notice, name, and address information intact.
-Written permission must be obtained from FixedPoint IO Ltd before this code, or any part thereof, is sold or used in a product which is sold.
-By using this code, you accept full responsibility for its use and will not hold FixedPoint IO Ltd, its employees or officers liable for damages of any sort.
-This code is not to be used for illegal purposes.
-This code cannot be reposted on public sites or sites such as code repositories.
-For technical questions contact charles@fixedpoint.io.
+## 1. Grant of License
+Licensor hereby grants to Licensee, and Licensee accepts, a non-exclusive, non-transferable license to use the ARTEMIS software ("Software") solely for internal purposes.
 
-Date: Friday, August 10, 2023
+## 2. Ownership
+The Software is owned by Licensor and is protected by copyright law. No title to or ownership of the Software is transferred to Licensee. Licensee acknowledges and agrees that the Software and all copies thereof are owned by Licensor, and all rights, title, and interest therein shall remain with Licensor.
 
-Company Details:
-FIXEDPOINT IO LTD
-Company number 13288661.
-Registered office address: 20-22 Wenlock Road, London, England, N1 7GU.
+## 3. Restrictions
+Licensee shall not:
+- Make copies of the Software or documentation.
+- Sell, lease, license, or sublicense the Software.
+- Modify, adapt, merge, or create derivative works based on the Software.
+- Reverse engineer, decompile, or disassemble the Software.
 
-Grant of License: FixedPoint IO Ltd grants to [Climate Impact Partners], a non-exclusive, non-transferable license to use the Artemis software ("Software").
+## 4. Termination
+This Agreement is effective until terminated. Licensor may terminate this Agreement if Licensee breaches any of its terms and conditions. Upon termination, Licensee shall destroy all copies of the Software.
 
-Restrictions: The client agrees not to, and not to allow third parties to:
+## 5. Disclaimer
+The Software is provided "as is" without warranty of any kind. Licensor disclaims all warranties, either express or implied, including but not limited to, implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
 
-Modify, adapt, translate, or create derivative works based on the Software.
-Rent, lease, sublicense, sell, assign, loan, or otherwise transfer the Software.
-Remove any proprietary notices or labels on the Software.
-Intellectual Property Rights: All rights, title, and interest in and to the Software, including any associated intellectual property rights, remain solely with FixedPoint IO Ltd.
+## 6. Limitation of Liability
+Licensor shall not be liable for any damages, including consequential, incidental, direct, indirect, special, punitive, or other damages arising out of the use or inability to use the Software.
 
-Termination: This license will terminate automatically if the client breaches any of the terms. Upon termination, the client must destroy all copies of the Software.
+## 7. Governing Law
+This Agreement shall be governed by the laws of England and Wales.
 
-Governing Law: This agreement is governed by the laws of England.
+## 8. Entire Agreement
+This Agreement contains the entire agreement between Licensor and Licensee and supersedes all prior negotiations, understandings, and agreements between the parties.
+
+---
+
+**COPYRIGHT NOTICE:**  
+This code was developed by FixedPoint IO Ltd for Climate Impact Partners and remains the intellectual property of FixedPoint IO Ltd. Redistribution or sale, in whole or in part, is strictly prohibited without the express written consent of FixedPoint IO Ltd. By using this code, you accept all responsibilities for its use and will not hold FixedPoint IO Ltd, its employees or officers, liable for damages of any sort. Use of this code for illegal purposes is strictly prohibited.  
+For technical inquiries, contact: charles@fixedpoint.io  
+(c) 2023 FixedPoint IO Ltd.
