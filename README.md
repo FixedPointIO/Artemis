@@ -1,7 +1,5 @@
-<p align="centre">
-  <a href="https://github.com/fixedpointexperimental/Artemis">
-    <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/artemis.jpg" alt="Artemis" width="150">
-  </a>
+<p align="center">
+  <img width="150" src="[https://www.python.org/python-.png](https://github.com/fixedpointexperimental/Artemis/blob/main/images/artemis.jpg)">
 </p>
 
 # ARTEMIS
