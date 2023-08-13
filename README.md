@@ -13,10 +13,8 @@
 - **Optimisation Techniques**: Incorporates Nevergrad, an advanced optimisation library, to refine growth model parameters, particularly in the presence of noisy data.
 - **Prior Knowledge Integration**: ARTEMIS facilitates the inclusion of prior information, sourced from academic literature or other authoritative sources. This aids in shaping the model's search space based on established data, ensuring a well-informed optimisation process.
 
-<p align="centre">
-  <a href="(https://github.com/fixedpointexperimental/Artemis)">
-    <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png" alt="Artemis" width="450" height="450">
-  </a>
+<p align="center">
+  <img width="450" src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png">
 </p>
 
 ## Incorporating Priors for Parameter Ranges
