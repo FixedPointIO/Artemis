@@ -18,7 +18,7 @@ Developed by **FixedPoint IO Ltd** for **Climate Impact Partners**.
 
 <p align="center">
   <a href="(https://github.com/fixedpointexperimental/Artemis)">
-    <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png" alt="Artemis" width="350" height="350">
+    <img src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/3d.png" alt="Artemis" width="450" height="450">
   </a>
 </p>
 
