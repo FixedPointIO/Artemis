@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150" src="[https://www.python.org/python-.png](https://github.com/fixedpointexperimental/Artemis/blob/main/images/artemis.jpg)">
+  <img width="150" src="https://github.com/fixedpointexperimental/Artemis/blob/main/images/artemis.jpg">
 </p>
 
 # ARTEMIS
