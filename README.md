@@ -47,14 +47,6 @@ The evolution of NGOpt involved iterative enhancements. Over time, certain rules
 
 For ARTEMIS, the integration of NGOpt means access to a tool that is not just versatile but also empirically validated. By leveraging NGOpt's capabilities, ARTEMIS ensures that its optimization processes are always aligned with the best available strategies, guaranteeing optimal outcomes across diverse forestry challenges. 
 
-
-
-## License & Copyright
-
-This software is proprietary and owned by Climate Impact Partners. Developed by FixedPoint IO Ltd.
-
-Refer to the software license agreement for more details on usage restrictions and permissions.
-
 ## Contact
 
 For technical questions and support, contact:
