@@ -12,10 +12,11 @@ Developed by **FixedPoint IO Ltd** in collaboration with **Climate Impact Partne
 
 ## Features
 
-- **Chapman-Richards Growth Function**: Precisely deduce tree and forest growth metrics.
-- **Data Cleaning**: Dedicated scripts to sift and refine forestry data.
-- **Innovative Optimisation**: Taps into Nevergrad—a forefront optimisation library—to accurately mould growth model parameters even with noisy forestry data.
-- **Prior Inclusion and Search Space Definition**: ARTEMIS provides the flexibility to incorporate priors, derived from sources such as academic literature. This allows users to define the model's search space based on "ground truth", ensuring the optimisation process is both informed and precise.
+- **Evolutionary Optimisation for Growth Function**: While the Chapman-Richards function is a standard in forestry, ARTEMIS stands out by using evolutionary algorithms for parameter optimisation, ensuring a more robust deduction of tree and forest growth metrics.
+- **Data Refinement**: Dedicated scripts to meticulously sift and refine forestry data.
+- **State-of-the-art Optimisation**: Leverages Nevergrad, a leading-edge optimisation library, to adeptly shape growth model parameters, even amidst noisy forestry data.
+- **Prior Inclusion and Search Space Customisation**: With ARTEMIS, users can seamlessly incorporate priors from authoritative sources like academic literature. This empowers them to tailor the model's search space based on established "ground truth", guaranteeing an optimisation process that's both knowledgeable and accurate.
+
 
 <p align="centre">
   <a href="(https://github.com/fixedpointexperimental/Artemis)">
