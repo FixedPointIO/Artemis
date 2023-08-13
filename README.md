@@ -28,7 +28,7 @@ Developed by **FixedPoint IO Ltd** in collaboration with **Climate Impact Partne
 
 Within ARTEMIS, there's a distinctive feature permitting users to embed prior knowledge, or "priors", into the optimisation process for parameter bounds. Such priors prove invaluable when academic evidence or factual data bolsters certain parameter values, thus steering the optimisation towards values congruent with extant insights. This facet is especially crucial in forestry statistics, a realm frequently encountering data susceptible to noise and outliers.
 
-To employ priors within ARTEMIS, simply specify the intended bounds for each parameter coupled with your knowledge range. The optimisation journey is then swayed by these priors, aiding you in securing more pertinent and precise parameter approximations. Priors can be anchored to metrics like tree growth rates (A), decay constants (k), and shape parameters (p), letting you amalgamate domain expertise with statistical optimisation for steadfast outcomes.
+To employ priors within ARTEMIS, simply specify the intended bounds for each parameter coupled with your knowledge range. The optimisation journey is then informed by these priors, aiding you in securing more pertinent and precise parameter approximations. Priors can be anchored to metrics like tree growth rates (A), decay constants (k), and shape parameters (p), letting you amalgamate domain expertise with statistical optimisation for steadfast outcomes.
 
 ## Intelligent Optimisation
 
