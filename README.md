@@ -33,8 +33,9 @@ Incorporating NGOpt into ARTEMIS provides the tool with a robust foundation, ens
 
 For any technical enquiries or support:
 
-Charles
-Email: charles@fixedpoint.io
+Charles Shaw
+
+charles@fixedpoint.io
 
 The demo dataset has been sourced from the U.S. Department of Agriculture, Forest Service, Pacific Southwest Research Station:
 
