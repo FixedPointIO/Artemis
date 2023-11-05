@@ -29,12 +29,10 @@ Forestry statistics, a key area within applied statistics, presents its own set 
 
 Incorporating NGOpt into ARTEMIS provides the tool with a robust foundation, ensuring that its optimisation methods are in line with proven strategies, all while addressing the multifaceted challenges of forestry statistics. ARTEMIS's use of evolutionary algorithms further underlines its methodical approach to parameter optimisation.
 
-## Contact
-
-For any technical or licensing enquiries: Charles Shaw (charles@fixedpoint.io)
+## Details
 
 The demo dataset has been sourced from the U.S. Department of Agriculture, Forest Service, Pacific Southwest Research Station:
 
 McPherson, E. Gregory; van Doorn, Natalie S.; Peper, Paula J. 2016. Urban tree database. Fort Collins, CO: Forest Service Research Data Archive. Updated 21 January 2020. https://doi.org/10.2737/RDS-2016
 
-Created by Charles Shaw, FixedPoint IO Ltd. 
+Created by Charles Shaw, enquiries: charles@fixedpoint.io
