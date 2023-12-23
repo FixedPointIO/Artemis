@@ -19,15 +19,13 @@
 
 ## Incorporating Priors for Parameter Ranges
 
-ARTEMIS provides a mechanism for users to integrate prior knowledge, termed as "priors", into the optimisation process. This becomes essential when there's academic backing or established data for certain parameter values. By doing so, the optimisation aligns more closely with known insights, which is pivotal in forestry statistics where data may be susceptible to inconsistencies.
+ARTEMIS provides a mechanism for users to integrate prior knowledge, constraints which can be considered as "priors" (though these are not priors in the Bayesian sense), into the optimisation process. This becomes essential when there's academic backing or established data for certain parameter values. By doing so, the optimisation aligns more closely with known insights, which is pivotal in forestry statistics where data may be susceptible to inconsistencies.
 
-To integrate priors in ARTEMIS, one needs to define the bounds for each parameter, complemented by the range informed by prior knowledge. This combination ensures that the optimisation is both grounded in domain expertise and statistically robust.
+To integrate such "priors" in ARTEMIS, one needs to define the bounds for each parameter, complemented by the range informed by prior knowledge. This combination ensures that the optimisation is both grounded in domain expertise and statistically robust.
 
 ## Intelligent Optimisation
 
-Forestry statistics, a key area within applied statistics, presents its own set of complexities, especially when modelling intricate systems or handling datasets lacking comprehensive quantitative information. In this context, the need arises for adaptable algorithm selection tools. NGOpt, part of the Nevergrad optimisation platform, is noteworthy due to its rigorous development and refinement process.
-
-Incorporating NGOpt into ARTEMIS provides the tool with a robust foundation, ensuring that its optimisation methods are in line with proven strategies, all while addressing the multifaceted challenges of forestry statistics. ARTEMIS's use of evolutionary algorithms further underlines its methodical approach to parameter optimisation.
+Forestry statistics presents its own set of complexities, especially when modelling intricate systems or handling noisy datasets. In this context, the need arises for adaptable algorithm selection tools. We make use of the Nevergrad optimisation platform to achieve parameter optimisation. However, other libraries eg Optuna, can be used also. Incorporating Nevergrad's NGOpt into ARTEMIS ensures that its optimisation methods are in line with proven strategies, all while addressing the multifaceted challenges of forestry statistics. 
 
 ## Details
 
@@ -35,4 +33,6 @@ The demo dataset has been sourced from the U.S. Department of Agriculture, Fores
 
 McPherson, E. Gregory; van Doorn, Natalie S.; Peper, Paula J. 2016. Urban tree database. Fort Collins, CO: Forest Service Research Data Archive. Updated 21 January 2020. https://doi.org/10.2737/RDS-2016
 
-Created by Charles Shaw, enquiries: charles@fixedpoint.io
+## Author
+
+Charles Shaw, enquiries: charles@fixedpoint.io
